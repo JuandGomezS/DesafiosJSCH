@@ -45,6 +45,15 @@ inp.addEventListener("focusout", () =>{
         document.getElementById("show").innerText = `El promedio de estatura es: ${res} cm`;   
     }
 
+    //Evento onclick para borrar todos los datos y limpiar templates e inputs
+    document.getElementById("recargar").onclick= () => {
+        acc=0;
+        np=0;
+        valueTem.innerHTML="";
+        document.getElementById("show").innerText ="";
+        inp.value="";
+    }
+
 
 })
 
