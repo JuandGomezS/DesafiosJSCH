@@ -37,9 +37,9 @@ document.getElementById("charge").onclick= () => {
     document.getElementById("iva2").innerText = producto2.iva;  
     document.getElementById("iva3").innerText = producto3.iva;
 
-    document.getElementById("vl-un1").innerText = producto1.precio;
-    document.getElementById("vl-un2").innerText = producto2.precio;  
-    document.getElementById("vl-un3").innerText = producto3.precio;
+    document.getElementById("vl-un1").innerText = `$ ${producto1.precio}`;
+    document.getElementById("vl-un2").innerText = `$ ${producto2.precio}`;  
+    document.getElementById("vl-un3").innerText = `$ ${producto3.precio}`;
 }
 
 //Evento focusout para calcular el precio con iva del producto, multiplicarlo por la cantidad y mostrarlo en la tabla
