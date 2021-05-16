@@ -42,11 +42,31 @@ document.getElementById("charge").onclick= () => {
     document.getElementById("vl-un3").innerText = `$ ${producto3.precio}`;
 }
 
+//FUNCIONES RELACIONADAS
+
+//Primer función para determinar el valor parcial por producto
+const valorParcial = (cantidad, precio)=>{
+    return Math.ceil(precio)*cantidad;
+}
+
+//Segunda función para determinar el valor total de la suma de todos los productos
+const valorTotal = (precio1,precio2,precio3)=>{
+    return precio1+precio2+precio3;
+}
+
+//Funcion que imprime la suma de todos los productos
+const mostrarTotal= (valorTotal)=>{
+    document.getElementById("totalt").innerText = `$ ${valorTotal}`;
+}
+
+
+
+
 //Evento focusout para calcular el precio con iva del producto, multiplicarlo por la cantidad y mostrarlo en la tabla
 c1.addEventListener("focusout", () =>{ 
     producto1.sumaIva();
     let can1 = c1.value;
-    t1 = Math.ceil(producto1.precio)*can1;
+    t1 = valorParcial(can1,producto1.precio);
     document.getElementById("vt1").innerText = `$ ${t1}`;
 });
 
@@ -54,7 +74,7 @@ c1.addEventListener("focusout", () =>{
 c2.addEventListener("focusout", () =>{ 
     producto2.sumaIva();
     let can2 = c2.value;
-    t2 = Math.ceil(producto2.precio)*can2;
+    t2 = valorParcial(can2,producto2.precio);
     document.getElementById("vt2").innerText = `$ ${t2}`;
 });
 
@@ -62,14 +82,14 @@ c2.addEventListener("focusout", () =>{
 c3.addEventListener("focusout", () =>{ 
     producto3.sumaIva();
     let can3 = c3.value;
-    t3 = Math.ceil(producto3.precio)*can3;
+    t3 = valorParcial(can3,producto3.precio);
     document.getElementById("vt3").innerText = `$ ${t3}`;
 });
 
 //Evento on click para calcular el total de la compra
 document.getElementById("total").onclick= () => {
-    let tt=t1+t2+t3;
-    document.getElementById("totalt").innerText = `$ ${tt}`;
+    let tt=valorTotal(t1,t2,t3);
+    mostrarTotal(tt);
 }
 
 //Evento on click para reinicializar variables
