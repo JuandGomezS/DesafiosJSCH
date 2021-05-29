@@ -64,8 +64,11 @@ h1.className = 'titulo d-flex justify-content-center align-items-center';
 title.appendChild(h1);
 
 function imprimir(tipo) {
+
+	//VARIABLE PARA EL TITULO DE LA SECCIÓN
 	let name = '';
 
+	//SEGÚN PARÁMETRO DE ENTRADA SE DEFINE EL TÍTULO
 	if (tipo === 'est') {
 		name = 'estampados';
 	} else if (tipo === 'pho') {
@@ -78,7 +81,7 @@ function imprimir(tipo) {
 		console.error('Invalid tipo');
 	}
 
-	//Filtrado de los objetos de tipo EST estampado
+	//Filtrado de los objetos según parametro de enntrada
 	let productosF = Productos.filter((elemento) => elemento.tipo === tipo.toUpperCase());
 
 	//generación de un elemento div que contiene a los conjuntos de cards de los productos
@@ -87,21 +90,21 @@ function imprimir(tipo) {
 	div.className = 'container1 d-flex justify-content-center align-items-center flex-column';
 	main.appendChild(div);
 
-	//generación de un elemento h2 título de las card de los productos de estampados
+	//generación de un elemento h2 título de las card de los productos 
 	//Se adiciona el className, textContent y clases de bootstrap
 	const h2 = document.createElement('h2');
 	h2.innerText = `Productos de ${name}`;
 	h2.className = 'titulos d-flex justify-content-center align-items-center';
 	div.appendChild(h2);
 
-	//generación de un elemento div que contiene las cards de los productos de estampados
+	//generación de un elemento div que contiene las cards de los productos 
 	//Se adiciona el className
 	const div1 = document.createElement('div');
 	div1.className = 'cards-est';
 	div.appendChild(div1);
 
 	//por medio de un for of se recorre el array resultante del filtrado para poder generar las cards
-	//correspondientes únicamente a estampados
+	//correspondientes únicamente a los filtrados según el parametro de entrada de la función "imprimir"
 	for (let item of productosF) {
 		div1.innerHTML += `<div class="card">
                         <h4>${item.nombre}</h4>
@@ -110,24 +113,30 @@ function imprimir(tipo) {
 	}
 }
 
+//EVENTOS CLICK PARA EJECUTAR SEGÚN EL BOTÓN UTILIZADO
 btnEst.addEventListener('click', () => {
+	//Remosión del primer elemento de la sección main
 	while (main.firstChild) {
 		main.removeChild(main.firstChild);
 	}
+	//Impresión de cards según parámetro
 	imprimir('est');
 });
+
 btnFot.addEventListener('click', () => {
 	while (main.firstChild) {
 		main.removeChild(main.firstChild);
 	}
 	imprimir('pho');
 });
+
 btnVid.addEventListener('click', () => {
 	while (main.firstChild) {
 		main.removeChild(main.firstChild);
 	}
 	imprimir('vid');
 });
+
 btnAds.addEventListener('click', () => {
 	while (main.firstChild) {
 		main.removeChild(main.firstChild);
