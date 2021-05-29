@@ -1,9 +1,11 @@
-
 //Variables pertinentes
 let Productos = [];
 const title = document.querySelector('header');
 const main = document.querySelector('main');
-
+let btnEst = document.querySelector('#esta');
+let btnVid = document.querySelector('#video');
+let btnFot = document.querySelector('#foto');
+let btnAds = document.querySelector('#ads');
 
 //Clase constructor del objeto tipo producto
 class Producto {
@@ -61,119 +63,74 @@ h1.textContent = 'Nuestros Productos';
 h1.className = 'titulo d-flex justify-content-center align-items-center';
 title.appendChild(h1);
 
-//generación de un elemento div que contiene a los conjuntos de cards de los productos 
-//Se adiciona el className y clases de bootstrap
-const div = document.createElement('div');
-div.className = 'container1 d-flex justify-content-center align-items-center flex-column';
-main.appendChild(div);
+function imprimir(tipo) {
+	let name = '';
 
-//generación de un elemento h2 título de las card de los productos de estampados
-//Se adiciona el className, textContent y clases de bootstrap
-const h2 = document.createElement('h2');
-h2.textContent = 'productos de estampados';
-h2.className = 'titulos d-flex justify-content-center align-items-center';
-div.appendChild(h2);
+	if (tipo === 'est') {
+		name = 'estampados';
+	} else if (tipo === 'pho') {
+		name = 'fotografía';
+	} else if (tipo === 'vid') {
+		name = 'video';
+	} else if (tipo === 'ad') {
+		name = 'publicidad';
+	} else {
+		console.error('Invalid tipo');
+	}
 
-//generación de un elemento div que contiene las cards de los productos de estampados
-//Se adiciona el className
-const div1 = document.createElement('div');
-div1.className = 'cards-est';
-div.appendChild(div1);
+	//Filtrado de los objetos de tipo EST estampado
+	let productosF = Productos.filter((elemento) => elemento.tipo === tipo.toUpperCase());
 
-//Filtrado de los objetos de tipo EST estampado
-let productosEst = Productos.filter(elemento => elemento.tipo === "EST");
+	//generación de un elemento div que contiene a los conjuntos de cards de los productos
+	//Se adiciona el className y clases de bootstrap
+	const div = document.createElement('div');
+	div.className = 'container1 d-flex justify-content-center align-items-center flex-column';
+	main.appendChild(div);
 
-//por medio de un for of se recorre el array resultante del filtrado para poder generar las cards
-//correspondientes únicamente a estampados
-for (let item of productosEst) {
-	div1.innerHTML += `<div class="card">
+	//generación de un elemento h2 título de las card de los productos de estampados
+	//Se adiciona el className, textContent y clases de bootstrap
+	const h2 = document.createElement('h2');
+	h2.innerText = `Productos de ${name}`;
+	h2.className = 'titulos d-flex justify-content-center align-items-center';
+	div.appendChild(h2);
+
+	//generación de un elemento div que contiene las cards de los productos de estampados
+	//Se adiciona el className
+	const div1 = document.createElement('div');
+	div1.className = 'cards-est';
+	div.appendChild(div1);
+
+	//por medio de un for of se recorre el array resultante del filtrado para poder generar las cards
+	//correspondientes únicamente a estampados
+	for (let item of productosF) {
+		div1.innerHTML += `<div class="card">
                         <h4>${item.nombre}</h4>
                         <p>$ ${item.precio} + IVA</p>
                      </div>`;
+	}
 }
 
-
-//generación de un elemento h2 título de las card de los productos de fotografía
-//Se adiciona el className, textContent y clases de bootstrap
-const h21 = document.createElement('h2');
-h21.textContent = 'productos de fotografía';
-h21.className = 'titulos d-flex justify-content-center align-items-center';
-div.appendChild(h21);
-
-//generación de un elemento div que contiene las cards de los productos de fotografía
-//Se adiciona el className
-const div2 = document.createElement('div');
-div2.className = 'cards-ph';
-div.appendChild(div2);
-
-
-//Filtrado de los objetos de tipo PHO fotografía
-let productosPh = Productos.filter(elemento => elemento.tipo === "PHO");
-
-
-//por medio de un for of se recorre el array resultante del filtrado para poder generar las cards
-//correspondientes únicamente a fotografia
-for (let item of productosPh) {
-	div2.innerHTML += `<div class="card">
-                        <h4>${item.nombre}</h4>
-                        <p>$ ${item.precio} + IVA</p>
-                     </div>`;
-}
-
-
-//generación de un elemento h2 título de las card de los productos de video
-//Se adiciona el className, textContent y clases de bootstrap
-const h22 = document.createElement('h2');
-h22.textContent = 'productos de video';
-h22.className = 'titulos d-flex justify-content-center align-items-center';
-div.appendChild(h22);
-
-
-//generación de un elemento div que contiene las cards de los productos de video
-//Se adiciona el className
-const div3 = document.createElement('div');
-div3.className = 'cards-vd';
-div.appendChild(div3);
-
-
-//Filtrado de los objetos de tipo VID video
-let productosVi = Productos.filter(elemento => elemento.tipo === "VID");
-
-
-//por medio de un for of se recorre el array resultante del filtrado para poder generar las cards
-//correspondientes únicamente a video
-for (let item of productosVi) {
-	div3.innerHTML += `<div class="card">
-                        <h4>${item.nombre}</h4>
-                        <p>$ ${item.precio} + IVA</p>
-                     </div>`;
-}
-
-
-//generación de un elemento h2 título de las card de los productos de publicidad
-//Se adiciona el className, textContent y clases de bootstrap
-const h23 = document.createElement('h2');
-h23.textContent = 'productos de publicidad';
-h23.className = 'titulos d-flex justify-content-center align-items-center';
-div.appendChild(h23);
-
-
-//generación de un elemento div que contiene las cards de los productos de publicidad
-//Se adiciona el className
-const div4 = document.createElement('div');
-div4.className = 'cards-ads';
-div.appendChild(div4);
-
-
-//Filtrado de los objetos de tipo AD publicidad
-let productosAd = Productos.filter(elemento => elemento.tipo === "AD");
-
-
-//generación de un elemento h2 título de las card de los productos de publicidad
-//Se adiciona el className, textContent y clases de bootstrap
-for (let item of productosAd) {
-	div4.innerHTML += `<div class="card">
-                        <h4>${item.nombre}</h4>
-                        <p>$ ${item.precio} + IVA</p>
-                     </div>`;
-}
+btnEst.addEventListener('click', () => {
+	while (main.firstChild) {
+		main.removeChild(main.firstChild);
+	}
+	imprimir('est');
+});
+btnFot.addEventListener('click', () => {
+	while (main.firstChild) {
+		main.removeChild(main.firstChild);
+	}
+	imprimir('pho');
+});
+btnVid.addEventListener('click', () => {
+	while (main.firstChild) {
+		main.removeChild(main.firstChild);
+	}
+	imprimir('vid');
+});
+btnAds.addEventListener('click', () => {
+	while (main.firstChild) {
+		main.removeChild(main.firstChild);
+	}
+	imprimir('ad');
+});
